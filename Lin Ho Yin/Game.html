@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>205CDE lab exercise</title>
+	<link rel="stylesheet" type="text/css" href="Gamepage.css">
+</head>
+<body >
+
+	<header class="header">
+		<h1>205CDE</h1>
+		<h2>Developing Modern Web</h2>
+	</header>
+	<nav>
+		<li><a href="HP.html">Introduction</a></li>
+		<li><a href="Game.html">Game</a></li>
+	</nav>
+	<main>
+		<section>
+			<h2>Paper-Scissor-Rock game</h2>
+			<article id="firstslide">
+				<header>
+				<h3>Playing agianst the computer. See if you have any luck!</h3>
+				<p>(CityU Scope ITB, March 2020)</p>
+				</header>
+					<div class="top"><img id="shiftPic" src="" / ></div>
+
+			</article>
+			<article>
+				<header>
+				<h3>Playing agianst the computer. See if you have any luck!</h3>
+				<p>(CityU Scope ITB, March 2020)</p>
+				</header>
+						<div style="width: 50%; float: left;"><img id="comchoose" src=""></div>
+						<div style="width: 50%; float: left;"><img id="userchoose"src=""></div>
+						<p id= "result"></p>
+			</article>
+			<article><!-- init results -->
+				<p class="score">Computer</p>
+				<p class="score" id="name">You</p>
+				<p class="mark" id="comscore">0</p>
+				<p class="mark">:</p>
+				<p class="mark" id="playerscore">0</p>
+			</article>
+
+		</section>
+		
+	</main>
+	<aside>
+		<h2>Enter your name to play:</h2>
+		<input type="text" id="player"><!--get name of the player-->
+		<button type="button" onclick="play()">PLAY!</button> <!-- run the play() function-->
+		<br>
+		<div id="showpic" style="display: none" >
+			<img id="rock" src="rock.png"  height="50px" width="50px" onclick="showrock()">
+			<img id="paper" src="paper.png" height="50px" width="50px" onclick="showpaper()">
+			<img id="scissor" src="scissor.png" height="50px" width="50px" onclick="showscissor()">
+		</div>
+	</aside>
+
+	<script type="text/javascript">
+		var inputname=document.getElementById("player")//get player name
+		var arr=new Array();
+		var num = Math.floor( Math.random() * 3);
+		var pic =arr[num];
+		var playerscore=0//init player score
+		var computerscore=0//init computerscore
+
+
+		arr[0]="rock.png";
+		arr[1]="scissor.png";
+		arr[2]="paper.png";
+		//picture
+		var index=0;
+		setInterval(function() {//loop between three pictures
+             var shiftPic=document.getElementById("shiftPic");
+             if(index==arr.length - 1) {
+                 index=0;
+             }
+             else {
+                 index +=1;
+             }
+             shiftPic.src=arr[index];
+             console.log(index);
+         },100)
+
+		function play(){
+			firstslide.style.opacity = 0;
+			document.getElementById("showpic").style.display= "block";
+			document.getElementById("name").innerHTML= inputname.value;
+			
+		}
+
+
+        function randomnum() {//create a random number
+            num=Math.floor(Math.random(0,.3)*3);
+            }
+
+
+		function showrock(){//if play choose rock
+			randomnum();//call to get a random number
+                if(num==0){ // player choose as computer
+                    document.getElementById("result").innerHTML="You are as smart as computer";
+                    document.getElementById("comchoose").src=arr[0];
+                    document.getElementById("userchoose").src=arr[0];
+                }
+                else if(num==1){//if computer get sicssor
+                    document.getElementById("result").innerHTML="You Win!";
+                    document.getElementById("comchoose").src=arr[1];
+                    document.getElementById("userchoose").src=arr[0];
+                    playerscore++;
+                    document.getElementById("playerscore").innerHTML=(playerscore);
+                    
+                }
+
+                if(num==2){// if computer get paper
+                    document.getElementById("result").innerHTML="You Lost!";
+					document.getElementById("comchoose").src=arr[2];
+					document.getElementById("userchoose").src=arr[0];
+					computerscore++;
+					document.getElementById("comscore").innerHTML=(computerscore);
+                    
+                }
+		}
+
+
+
+		function showscissor(){//if play choose scissor
+			randomnum();
+                if(num==0){// if computer get rock
+                    document.getElementById("result").innerHTML="You Lost!";
+                    document.getElementById("comchoose").src=arr[0];
+                    document.getElementById("userchoose").src=arr[1];
+                    computerscore++;
+                    document.getElementById("comscore").innerHTML=(computerscore);
+                    
+                }
+                else if(num==1){// player choose as computer
+                    document.getElementById("result").innerHTML="You are as smart as computer";
+                    document.getElementById("comchoose").src=arr[1];
+                    document.getElementById("userchoose").src=arr[1];
+                }
+
+                if(num==2){ // if computer get paper
+                    document.getElementById("result").innerHTML="You Win!";
+					document.getElementById("comchoose").src=arr[2];
+					document.getElementById("userchoose").src=arr[1];
+					playerscore++;
+					document.getElementById("playerscore").innerHTML=(playerscore);
+                    
+                }
+		}
+
+        
+		function showpaper(){//if play choose paper
+			randomnum();
+                if(num==0){//if computer get rock
+                    document.getElementById("result").innerHTML="You Win!";
+                    document.getElementById("comchoose").src=arr[0];
+                    document.getElementById("userchoose").src=arr[2];
+                    playerscore++;
+
+                    document.getElementById("playerscore").innerHTML=(playerscore);
+                    }
+                else if(num==1){// if computer get scissor
+                    document.getElementById("result").innerHTML="You Lose!";
+                    document.getElementById("comchoose").src=arr[1];
+                    document.getElementById("userchoose").src=arr[2]
+                    computerscore++;
+                   	document.getElementById("comscore").innerHTML=(computerscore);
+                    
+                }
+
+                if(num==2){// player choose as computer
+                    document.getElementById("result").innerHTML="You are as smart as computer";
+					document.getElementById("comchoose").src=arr[2];
+					document.getElementById("userchoose").src=arr[2]
+                }
+		}
+
+
+	</script>
+	<footer>
+		<p>&copy; Copyright 205CDE</p>
+	</footer>
+</body>
+</html>
